@@ -1,20 +1,8 @@
-
-Memory updated
-Here’s what the ER (Entity Relationship) diagram for the BM-Shop would look like conceptually, based on the tables and relationships:
-
-ER Diagram Description:
+ERD
 Customers (1) --- (M) Orders
-
-A customer can have multiple orders.
 Orders (1) --- (M) Order_Items
-
-An order can have multiple order items (many products in an order).
 Order_Items (M) --- (1) Products
-
-Many order items can relate to a single product.
 Products (M) --- (1) Categories
-
-Each product belongs to a single category.
 Orders (1) --- (1) Payments
 
 Each order has one payment.
