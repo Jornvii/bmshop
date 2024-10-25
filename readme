@@ -4,35 +4,3 @@ Orders (1) --- (M) Order_Items
 Order_Items (M) --- (1) Products
 Products (M) --- (1) Categories
 Orders (1) --- (1) Payments
-
-Each order has one payment.
-Visualizing the relationships:
-Customers and Orders: One customer can place many orders.
-Orders and Order_Items: An order can have many items.
-Order_Items and Products: Many items can refer to one product.
-Products and Categories: Products belong to a single category.
-Orders and Payments: One order has one payment.
-
-
-----------------data structure
-bmshop/
-│
-├── config/
-│   └── db.js       # Your database config (already provided)
-│
-├── models/
-│   ├── Customer.js
-│   ├── Product.js
-│   ├── Category.js
-│   ├── Order.js
-│   ├── OrderItem.js
-│   └── Payment.js
-│
-├── routes/
-│   └── bmshopRoutes.js  # All CRUD routes
-│
-├── controllers/
-│   └── bmshopController.js  # All CRUD logic
-│
-├── app.js  # Main app file
-└── package.json

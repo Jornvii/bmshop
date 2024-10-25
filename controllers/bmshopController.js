@@ -6,35 +6,6 @@ const Order = require('../models/Order');
 const OrderItem = require('../models/OrderItem');
 const Payment = require('../models/Payment');
 
-
-// Customer Crud
-// Create a new customer
-exports.createCustomer = async (req, res) => {
-    try {
-      const { first_name, last_name, email, password, phone, address } = req.body;
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password, salt);
-  
-      const newCustomer = await Customer.create({
-        first_name,
-        last_name,
-        email,
-        password: hashedPassword,
-        phone,
-        address,
-      });
-  
-      res.status(201).json({
-        message: 'Customer created successfully',
-        data: newCustomer
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: 'Failed to create customer',
-        error: err.message
-      });
-    }
-  };
   
   // Get all customers
   exports.getCustomers = async (req, res) => {
@@ -133,248 +104,11 @@ exports.createCustomer = async (req, res) => {
   };
   
 
-
-  // Create a new product
-exports.createProduct = async (req, res) => {
-  try {
-    const { product_name, category_id, price, stock_quantity, description } = req.body;
-
-    const newProduct = await Product.create({
-      product_name,
-      category_id,
-      price,
-      stock_quantity,
-      description,
-    });
-
-    res.status(201).json({
-      message: 'Product created successfully',
-      data: newProduct
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: 'Failed to create product',
-      error: err.message
-    });
-  }
-};
-
-// Get all products
-exports.getProducts = async (req, res) => {
-  try {
-    const products = await Product.findAll();
-    res.status(200).json({
-      message: 'Products retrieved successfully',
-      data: products
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: 'Failed to retrieve products',
-      error: err.message
-    });
-  }
-};
-
-// Get product by ID
-exports.getProductById = async (req, res) => {
-  try {
-    const product = await Product.findByPk(req.params.id);
-    if (product) {
-      res.status(200).json({
-        message: 'Product retrieved successfully',
-        data: product
-      });
-    } else {
-      res.status(404).json({
-        message: 'Product not found',
-        data: null
-      });
-    }
-  } catch (err) {
-    res.status(500).json({
-      message: 'Failed to retrieve product',
-      error: err.message
-    });
-  }
-};
-
-// Update product by ID
-exports.updateProduct = async (req, res) => {
-  try {
-    const product = await Product.findByPk(req.params.id);
-    if (product) {
-      const { product_name, category_id, price, stock_quantity, description } = req.body;
-
-      await product.update({
-        product_name,
-        category_id,
-        price,
-        stock_quantity,
-        description,
-      });
-
-      res.status(200).json({
-        message: 'Product updated successfully',
-        data: product
-      });
-    } else {
-      res.status(404).json({
-        message: 'Product not found',
-        data: null
-      });
-    }
-  } catch (err) {
-    res.status(500).json({
-      message: 'Failed to update product',
-      error: err.message
-    });
-  }
-};
-
-// Delete product by ID
-exports.deleteProduct = async (req, res) => {
-  try {
-    const product = await Product.findByPk(req.params.id);
-    if (product) {
-      await product.destroy();
-      res.status(200).json({
-        message: 'Product deleted successfully',
-      });
-    } else {
-      res.status(404).json({
-        message: 'Product not found',
-        data: null
-      });
-    }
-  } catch (err) {
-    res.status(500).json({
-      message: 'Failed to delete product',
-      error: err.message
-    });
-  }
-};
-
-// *******************************************************
-
-// Create a new product
-exports.createProduct = async (req, res) => {
-    try {
-      const { product_name, category_id, price, stock_quantity, description } = req.body;
+// ******************************************* productproductproductproduct 
+// ******************************************* productproductproductproduct 
+// ******************************************* productproductproductproduct 
+// ******************************************* productproductproductproduct 
   
-      const newProduct = await Product.create({
-        product_name,
-        category_id,
-        price,
-        stock_quantity,
-        description,
-      });
-  
-      res.status(201).json({
-        message: 'Product created successfully',
-        data: newProduct
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: 'Failed to create product',
-        error: err.message
-      });
-    }
-  };
-  
-  // Get all products
-  exports.getProducts = async (req, res) => {
-    try {
-      const products = await Product.findAll();
-      res.status(200).json({
-        message: 'Products retrieved successfully',
-        data: products
-      });
-    } catch (err) {
-      res.status(500).json({
-        message: 'Failed to retrieve products',
-        error: err.message
-      });
-    }
-  };
-  
-  // Get product by ID
-  exports.getProductById = async (req, res) => {
-    try {
-      const product = await Product.findByPk(req.params.id);
-      if (product) {
-        res.status(200).json({
-          message: 'Product retrieved successfully',
-          data: product
-        });
-      } else {
-        res.status(404).json({
-          message: 'Product not found',
-          data: null
-        });
-      }
-    } catch (err) {
-      res.status(500).json({
-        message: 'Failed to retrieve product',
-        error: err.message
-      });
-    }
-  };
-  
-  // Update product by ID
-  exports.updateProduct = async (req, res) => {
-    try {
-      const product = await Product.findByPk(req.params.id);
-      if (product) {
-        const { product_name, category_id, price, stock_quantity, description } = req.body;
-  
-        await product.update({
-          product_name,
-          category_id,
-          price,
-          stock_quantity,
-          description,
-        });
-  
-        res.status(200).json({
-          message: 'Product updated successfully',
-          data: product
-        });
-      } else {
-        res.status(404).json({
-          message: 'Product not found',
-          data: null
-        });
-      }
-    } catch (err) {
-      res.status(500).json({
-        message: 'Failed to update product',
-        error: err.message
-      });
-    }
-  };
-  
-  // Delete product by ID
-  exports.deleteProduct = async (req, res) => {
-    try {
-      const product = await Product.findByPk(req.params.id);
-      if (product) {
-        await product.destroy();
-        res.status(200).json({
-          message: 'Product deleted successfully',
-        });
-      } else {
-        res.status(404).json({
-          message: 'Product not found',
-          data: null
-        });
-      }
-    } catch (err) {
-      res.status(500).json({
-        message: 'Failed to delete product',
-        error: err.message
-      });
-    }
-  };
 
 
 //   ***************************************************
@@ -714,6 +448,137 @@ exports.deleteOrderItem = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       message: 'Failed to delete order item',
+      error: err.message
+    });
+  }
+};
+
+
+
+// ******************************************************   payment
+// Create a new payment
+exports.createPayment = async (req, res) => {
+  try {
+    const { order_id, amount, payment_method, payment_status } = req.body;
+    if (!order_id || !amount || !payment_method || !payment_status) {
+      return res.status(400).json({
+        message: 'Missing required fields'
+      });
+    }
+
+    const newPayment = await Payment.create({
+      order_id,
+      amount,
+      payment_method,
+      payment_status,
+      payment_date: new Date()
+    });
+
+    res.status(201).json({
+      message: 'Payment created successfully',
+      data: newPayment
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: 'Failed to create payment',
+      error: err.message
+    });
+  }
+};
+
+// Get all Payments
+exports.getPayments = async (req, res) => {
+  try {
+    const payments = await Payment.findAll();
+    res.status(200).json({
+      message: 'Payments retrieved successfully',
+      data: payments
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: 'Failed to retrieve payments',
+      error: err.message
+    });
+  }
+};
+
+// Get Payment by ID
+exports.getPaymentById = async (req, res) => {
+  try {
+    const payment = await Payment.findByPk(req.params.id);
+    if (payment) {
+      res.status(200).json({
+        message: 'Payment retrieved successfully',
+        data: payment
+      });
+    } else {
+      res.status(404).json({
+        message: 'Payment not found',
+        data: null
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: 'Failed to retrieve payment',
+      error: err.message
+    });
+  }
+};
+
+// Update a payment by ID
+exports.updatePayment = async (req, res) => {
+  try {
+    const payment = await Payment.findByPk(req.params.id);
+    if (payment) {
+      const { amount, payment_method, payment_status } = req.body;
+
+      // Ensure required fields are present
+      if (!amount || !payment_method || !payment_status) {
+        return res.status(400).json({
+          message: 'Missing required fields'
+        });
+      }
+
+      await payment.update({
+        amount,
+        payment_method,
+        payment_status
+      });
+
+      res.json({
+        message: 'Payment updated successfully',
+        data: payment
+      });
+    } else {
+      res.status(404).json({
+        message: 'Payment not found'
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: 'Failed to update payment',
+      error: err.message
+    });
+  }
+};
+// Delete Payment by ID
+exports.deletePayment = async (req, res) => {
+  try {
+    const payment = await Payment.findByPk(req.params.id);
+    if (payment) {
+      await payment.destroy();
+      res.status(200).json({
+        message: 'Payment deleted successfully',
+      });
+    } else {
+      res.status(404).json({
+        message: 'Payment not found',
+        data: null
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: 'Failed to delete payment',
       error: err.message
     });
   }

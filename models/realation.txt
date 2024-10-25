@@ -1,0 +1,22 @@
+const Customer = require('./Customer');
+const Order = require('./Order');
+const OrderItem = require('./OrderItem');
+const Product = require('./Product');
+const Category = require('./Category');
+
+// Customer - Order
+Customer.hasMany(Order, { foreignKey: 'customer_id', onDelete: 'CASCADE' });
+Order.belongsTo(Customer, { foreignKey: 'customer_id', onDelete: 'CASCADE' });
+
+// Order - OrderItem
+Order.hasMany(OrderItem, { foreignKey: 'order_id', onDelete: 'CASCADE' });
+OrderItem.belongsTo(Order, { foreignKey: 'order_id', onDelete: 'CASCADE' });
+
+// Product - OrderItem
+Product.hasMany(OrderItem, { foreignKey: 'product_id', onDelete: 'CASCADE' });
+OrderItem.belongsTo(Product, { foreignKey: 'product_id', onDelete: 'CASCADE' });
+
+// Product - Category
+Category.hasMany(Product, { foreignKey: 'category_id', onDelete: 'CASCADE' });
+Product.belongsTo(Category, { foreignKey: 'category_id', onDelete: 'CASCADE' });
+
