@@ -79,14 +79,20 @@ exports.updateProduct = async (req, res) => {
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.findAll({
-      include: [Category],
-      order: [['product_id', 'ASC']]  
+      include: [
+        {
+          model: Category,
+          attributes: ['category_id', 'category_name']  
+        }
+      ],
+      order: [['product_id', 'ASC']]
     });
     res.status(200).json({ success: true, data: products });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
 // Get product by ID
 exports.getProductById = async (req, res) => {
   try {

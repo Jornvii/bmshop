@@ -147,28 +147,28 @@ exports.createCategory = async (req, res) => {
     }
   };
   
-  // Get category by ID
-  exports.getCategoryById = async (req, res) => {
-    try {
-      const category = await Category.findByPk(req.params.id);
-      if (category) {
-        res.status(200).json({
-          message: 'Category retrieved successfully',
-          data: category
-        });
-      } else {
-        res.status(404).json({
-          message: 'Category not found',
-          data: null
-        });
-      }
-    } catch (err) {
-      res.status(500).json({
-        message: 'Failed to retrieve category',
-        error: err.message
-      });
-    }
-  };
+// Get products by category ID
+exports.getProductsByCategory = async (req, res) => {
+  try {
+    const { categoryId } = req.params;
+    
+    const products = await Product.findAll({
+      where: { category_id: categoryId },
+      include: [
+        {
+          model: Category,
+          attributes: ['category_id', 'category_name']
+        }
+      ],
+      order: [['product_id', 'ASC']]
+    });
+    
+    res.status(200).json({ success: true, data: products });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
   
   // Update category by ID
   exports.updateCategory = async (req, res) => {

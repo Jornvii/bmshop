@@ -26,7 +26,7 @@ router.delete('/products/:id', productController.deleteProduct);
 // CATEGORY ROUTES
 router.post('/categories', bmshopController.createCategory);
 router.get('/categories', bmshopController.getCategories);
-router.get('/categories/:id', bmshopController.getCategoryById);
+router.get('/categories/:id', bmshopController.getProductsByCategory);
 router.put('/categories/:id', bmshopController.updateCategory);
 router.delete('/categories/:id', bmshopController.deleteCategory);
 
